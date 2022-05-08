@@ -10,7 +10,15 @@ module Enumerable
     end
   end
 
-  def my_select; end
+  def my_select
+    new_arr = []
+    my_each do |x|
+      next unless yield(x) == true
+
+      new_arr << x
+    end
+    new_arr
+  end
 
   def my_all?; end
 
