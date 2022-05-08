@@ -73,7 +73,14 @@ module Enumerable
     i
   end
 
-  def my_map; end
+  def my_map
+    new_arr = []
+
+    my_each do |x|
+        new_arr << yield(x)
+    end
+    new_arr
+  end
 
   def my_inject; end
 end
