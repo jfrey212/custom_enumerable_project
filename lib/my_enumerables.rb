@@ -20,7 +20,15 @@ module Enumerable
     new_arr
   end
 
-  def my_all?; end
+  def my_all?
+    new_arr = []
+    my_each do |x|
+      if yield(x) == false
+        return false
+      end
+    end
+    true
+  end
 
   def my_any?; end
 
