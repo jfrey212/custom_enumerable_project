@@ -38,7 +38,14 @@ module Enumerable
     false
   end
 
-  def my_none?; end
+  def my_none?
+    my_each do |x|
+      if yield(x) == true
+        return false
+      end
+    end
+    true
+  end
 
   def my_count; end
 
