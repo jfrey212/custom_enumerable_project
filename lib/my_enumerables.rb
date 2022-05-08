@@ -21,7 +21,6 @@ module Enumerable
   end
 
   def my_all?
-    new_arr = []
     my_each do |x|
       if yield(x) == false
         return false
@@ -30,7 +29,14 @@ module Enumerable
     true
   end
 
-  def my_any?; end
+  def my_any?
+    my_each do |x|
+      if yield(x) == true
+        return true
+      end
+    end
+    false
+  end
 
   def my_none?; end
 
