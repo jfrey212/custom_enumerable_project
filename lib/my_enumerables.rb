@@ -1,5 +1,14 @@
+# frozen_string_literal: true
+
+# Add custom enumerable methods to enumerable class
 module Enumerable
-  def my_each_with_index; end
+  def my_each_with_index
+    index = 0
+    my_each do |x|
+      yield(x, index)
+      index += 1
+    end
+  end
 
   def my_select; end
 
@@ -23,10 +32,10 @@ end
 class Array
   def my_each
     i = 0
-    while (i < self.length)
+    while i < self.length
       yield(self[i]) if block_given?
       i += 1
     end
-  return self
+  self
   end
 end
