@@ -22,8 +22,12 @@ module Enumerable
 
   def my_all?
     my_each do |x|
-      if yield(x) == false
-        return false
+      if block_given?
+        if yield(x) == false
+          return false
+        end
+      else
+        return true
       end
     end
     true
@@ -31,7 +35,11 @@ module Enumerable
 
   def my_any?
     my_each do |x|
-      if yield(x) == true
+      if block_given?
+        if yield(x) == true
+          return true
+        end
+      else
         return true
       end
     end
@@ -40,14 +48,30 @@ module Enumerable
 
   def my_none?
     my_each do |x|
-      if yield(x) == true
+      if block_given?
+        if yield(x) == true
+          return false
+        end
+      else
         return false
       end
     end
     true
   end
 
-  def my_count; end
+  def my_count
+    i = 0
+    my_each do |x|
+      if block_given?
+        next unless yield(x) == true
+
+        i += 1
+      else
+        i += 1
+      end
+    end
+    i
+  end
 
   def my_map; end
 
